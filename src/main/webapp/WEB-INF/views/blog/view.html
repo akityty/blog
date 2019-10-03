@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/blog/layout::head">
+</head>
+<body>
+<p>
+    <a th:href="@{/blog/list}">Back to list</a>
+</p>
+<h3>View Blog</h3>
+<div>
+
+    <form th:action="@{/blog/view}" enctype="multipart/form-data">
+        <div>
+            <span>ID: </span>
+            <input type="text" id="id" name="id" th:value="${blog.id}" readonly>
+        </div>
+        <div>
+            <label>Date: </label>
+            <br>
+            <input type="date" name="createDate" id="createDate" th:value="${blog.createDate}">
+        </div>
+        <div>
+            <label>Tittle: </label>
+            <br>
+            <input type="text" name="tittle" id="tittle" th:value="${blog.tittle}">
+        </div>
+        <div>
+            <label>Category:</label>
+            <br>
+            <input type="text" name="category" id="category" th:value="${blog.category}">
+        </div>
+        <div>
+            <span>Image: </span>
+            <input type="file" name="image" id="image" th:text="${blog.image}">
+            <img width="50px" height="50px" th:src="@{'/i/' + ${blog.image}}">
+        </div>
+        <div>
+            <label>Content:</label>
+            <br>
+            <input type="text" name="content" id="content" th:value="${blog.content}">
+        </div>
+    </form>
+</div>
+</body>
+</html>

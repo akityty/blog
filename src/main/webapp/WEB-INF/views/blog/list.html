@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/blog/layout :: head" >
+</head>
+<body>
+<h3>Blog</h3>
+
+<p>
+    <a th:href="@{/blog/create}">
+        Add new product
+    </a>
+</p>
+
+<form th:action="@{/blog/search}" method="POST" novalidate="novalidate">
+    <input type="text" name="name">
+    <input type="submit" value="Search">
+</form>
+
+<table border="1" id = "blogs">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>date</th>
+        <th>Tittle</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th>Content</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="row,rowStat : ${blogs}">
+        <td th:text="${row.getId()}"></td>
+        <td th:text="${row.getCreateDate()}"></td>
+        <td th:text="${row.getTittle()}"></td>
+        <td th:text="${row.getCategory()}"></td>
+        <td>
+            <img width="50px" height="50px" th:src="@{'/i/' + ${row.image}}">
+        </td>
+        <td th:text="${row.getContent()}"></td>
+        <td><a th:href="@{/blog/view(id=${row.getId()})}">view</a></td>
+        <td><a th:href="@{/blog/edit(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/blog/delete(id=${row.getId()})}">delete</a></td>
+    </tr>
+    </tbody>
+
+</table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
